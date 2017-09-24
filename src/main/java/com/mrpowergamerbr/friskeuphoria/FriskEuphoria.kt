@@ -12,8 +12,8 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 fun main(args: Array<String>) {
-	val bytes = File("D:\\SteamLibrary\\steamapps\\common\\Undertale\\data_original.win").readBytes() // And read it to a byte array!
-	val edited = File("D:\\SteamLibrary\\steamapps\\common\\Undertale\\data.win")
+	val bytes = File("D:\\FriskEuphoria\\DummyGame\\data_original.win").readBytes() // And read it to a byte array!
+	val edited = File("D:\\FriskEuphoria\\DummyGame\\data.win")
 
 	var binaryStream = BinaryStream(bytes)
 

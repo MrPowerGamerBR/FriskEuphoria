@@ -19,6 +19,7 @@ class StringChunk(chunkName: String) : Chunk(chunkName) {
 		dos.writeInt(addressCount)
 
 		for ((index, string) in strings.withIndex()) {
+			println("currentAddr: $currentAddr")
 			newAddrs.add(currentAddr)
 			dos.writeInt(currentAddr)
 			currentAddr = currentAddr + 4 + string.length + 1
@@ -46,8 +47,14 @@ class StringChunk(chunkName: String) : Chunk(chunkName) {
 
 		println("addressCount: $addressCount")
 
+		var updatedFirstAddr = false
+
 		for (i in 0 until addressCount) {
 			val addr = binaryStream.buffer.int
+			if (!updatedFirstAddr) {
+				updatedFirstAddr = true
+				currentAddr = addr
+			}
 			addresses.add(addr)
 			originalAddrs.add(addr)
 		}
@@ -60,7 +67,7 @@ class StringChunk(chunkName: String) : Chunk(chunkName) {
 
 			val str = binaryStream.readString(length)
 
-			strings.add(str.replace("Long", "oao "))
+			strings.add(str)
 
 			binaryStream.buffer.get() // unknown byte
 		}
@@ -72,7 +79,7 @@ class StringChunk(chunkName: String) : Chunk(chunkName) {
 		}
 		val string = test.joinToString(separator = "\n")
 
-		File("D:\\FriskEuphoria\\strings.txt").writeText(string)
+		File("D:\\FriskEuphoria\\DummyGame\\strings.txt").writeText(string)
 
 		val baos = ByteArrayOutputStream()
 
